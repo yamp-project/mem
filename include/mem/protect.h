@@ -29,7 +29,7 @@
 #    if !defined(WIN32_LEAN_AND_MEAN)
 #        define WIN32_LEAN_AND_MEAN
 #    endif
-#    include <Windows.h>
+#    include <windows.h>
 #elif defined(__unix__)
 #    if !defined(_GNU_SOURCE)
 #        define _GNU_SOURCE

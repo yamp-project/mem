@@ -32,12 +32,14 @@
 #    if !defined(WIN32_LEAN_AND_MEAN)
 #        define WIN32_LEAN_AND_MEAN
 #    endif
-#    include <Windows.h>
+#    include <windows.h>
 #    include <intrin.h>
+#    if !__MINGW64__ && !__MINGW32__
 #    if defined(_WIN64)
 #        pragma intrinsic(__readgsqword)
 #    else
 #        pragma intrinsic(__readfsdword)
+#    endif
 #    endif
 #elif defined(__unix__)
 #    ifndef _GNU_SOURCE
