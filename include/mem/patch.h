@@ -49,7 +49,15 @@ namespace mem
 
     MEM_STRONG_INLINE void pointer::nop(size_t len, std::vector<unsigned char>* modified_bytes) const noexcept
     {
-        nop(len, modified_bytes ? modified_bytes->data() : nullptr);
+        if (modified_bytes)
+        {
+            modified_bytes->resize(len);
+            nop(len, modified_bytes->data());
+        }
+        else
+        {
+            nop(len);
+        }
     }
 } // namespace mem
 
