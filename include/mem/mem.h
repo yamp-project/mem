@@ -25,6 +25,7 @@
 #include <cstring>
 #include <type_traits>
 #include <utility>
+#include <vector>
 
 namespace mem
 {
@@ -59,6 +60,19 @@ namespace mem
 
 #if defined(MEM_ARCH_X86_64)
         pointer rip(std::size_t offset) const noexcept;
+
+        // custom implementations
+        template <typename T>
+        constexpr void put(const T& value) const noexcept;
+
+        template <size_t N>
+        constexpr void put(uint8_t (&bytes)[N]) const noexcept;
+
+        void put(unsigned char* bytes, size_t size) const noexcept;
+        void nop(size_t len, unsigned char* modified_bytes) const noexcept;
+        void nop(size_t len, std::vector<unsigned char>* modified_bytes) const noexcept;
+        // custom implementations
+
 #endif // MEM_ARCH_X86_64
 
         pointer& deref() const noexcept;
