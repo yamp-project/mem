@@ -9,7 +9,7 @@ namespace mem
     MEM_STRONG_INLINE constexpr void pointer::put(const T& value) const noexcept
     {
         void* addr = reinterpret_cast<void*>(value_);
-        prot_flags old_flags;
+        prot_flags old_flags {};
 
         protect_modify(addr, sizeof(T), prot_flags::RW, &old_flags);
         memcpy(addr, &value, sizeof(T));
@@ -40,10 +40,10 @@ namespace mem
         protect_modify(addr, len, prot_flags::RW, &old_flags);
         if (modified_bytes)
         {
-            memcpy_s(modified_bytes, len, addr, len);
+            std::memcpy(modified_bytes, addr, len);
         }
 
-        memset(addr, 0x90, len);
+        std::memset(addr, 0x90, len);
         protect_modify(addr, len, old_flags);
     }
 
