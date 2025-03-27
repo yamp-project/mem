@@ -60,8 +60,8 @@ namespace mem
         pointer rip(std::size_t offset) const noexcept;
 
         // custom implementations
-        constexpr static pointer* virtual_mem() noexcept;
-        constexpr static pointer get_virtual_mem(size_t size) noexcept;
+        static pointer* virtual_mem() noexcept;
+        static pointer get_virtual_mem(size_t size) noexcept;
 
         template <typename T>
         constexpr void put(const T& value) const noexcept;
@@ -69,16 +69,16 @@ namespace mem
         template <size_t N>
         constexpr void put(uint8_t (&bytes)[N]) const noexcept;
 
-        constexpr void put(unsigned char* bytes, size_t size) const noexcept;
-        constexpr void nop(size_t len, unsigned char* modified_bytes) const noexcept;
-        constexpr void nop(size_t len, std::vector<unsigned char>* modified_bytes) const noexcept;
+        void put(unsigned char* bytes, size_t size) const noexcept;
+        void nop(size_t len, unsigned char* modified_bytes) const noexcept;
+        void nop(size_t len, std::vector<unsigned char>* modified_bytes) const noexcept;
+        void ret() const noexcept;
 
-        constexpr void ret() const noexcept;
-        constexpr void make_jmp(uintptr_t func) const noexcept;
-        constexpr void make_jmp_ret(void* func) const noexcept;
-        constexpr void make_jmp_ret(uintptr_t func) const noexcept;
-        constexpr void make_call(uintptr_t func) const noexcept;
-        constexpr void set_call(void* func, bool ret = false) const noexcept;
+        void make_jmp(uintptr_t func) const noexcept;
+        void make_jmp_ret(void* func) const noexcept;
+        void make_jmp_ret(uintptr_t func) const noexcept;
+        void make_call(uintptr_t func) const noexcept;
+        void set_call(void* func, bool ret) const noexcept;
         // custom implementations
 
 #endif // MEM_ARCH_X86_64
