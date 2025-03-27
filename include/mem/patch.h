@@ -7,7 +7,7 @@ namespace mem
 {
     MEM_STRONG_INLINE pointer* pointer::virtual_mem() noexcept
     {
-        static pointer _virtualmem((uintptr_t)0);
+        static pointer _virtualmem((uintptr_t)VirtualAlloc((void*)((uintptr_t)GetModuleHandleA(NULL) + 0x20000000), 1024, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE));
         return &_virtualmem;
     }
 
@@ -19,7 +19,7 @@ namespace mem
             current->value_ += 1;
         }
 
-        pointer res(current);
+        pointer res(*current);
         current->value_ += size;
         return res;
     }
@@ -109,7 +109,7 @@ namespace mem
         pointer(value_ + 1).put(int32_t(func - value_ - 5));
     }
 
-    MEM_STRONG_INLINE void pointer::set_call(void* func, bool ret = false) const noexcept
+    MEM_STRONG_INLINE void pointer::set_call(void* func, bool ret) const noexcept
     {
         pointer jmpMem = get_virtual_mem(12);
         if(ret) jmpMem.make_jmp_ret((uintptr_t)func);

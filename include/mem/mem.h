@@ -72,13 +72,13 @@ namespace mem
         void put(unsigned char* bytes, size_t size) const noexcept;
         void nop(size_t len, unsigned char* modified_bytes) const noexcept;
         void nop(size_t len, std::vector<unsigned char>* modified_bytes) const noexcept;
-        void ret() const noexcept;
 
+        void ret() const noexcept;
         void make_jmp(uintptr_t func) const noexcept;
         void make_jmp_ret(void* func) const noexcept;
         void make_jmp_ret(uintptr_t func) const noexcept;
         void make_call(uintptr_t func) const noexcept;
-        void set_call(void* func, bool ret) const noexcept;
+        void set_call(void* func, bool ret = false) const noexcept;
         // custom implementations
 
 #endif // MEM_ARCH_X86_64
