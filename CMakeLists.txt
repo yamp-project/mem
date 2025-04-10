@@ -4,10 +4,11 @@ option(MEM_TEST "Generate the test target." OFF)
 
 project(mem CXX)
 
-add_library(mem INTERFACE)
+if(NOT TARGET mem)
+    add_library(mem INTERFACE)
+endif()
 
-target_include_directories(mem INTERFACE
-    include)
+target_include_directories(mem INTERFACE include)
 
 if (MEM_TEST)
     enable_testing()
